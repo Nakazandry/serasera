@@ -294,9 +294,9 @@ exports.updateOrder = asyncHandler(async (req, res) => {
       : null;
     const { rows } = await client.query(
       `UPDATE commandes
-       SET statut = $1,
-           annule_par = CASE WHEN $1 = 'Annulée' THEN COALESCE($3, annule_par) ELSE null END,
-           raison_annulation = CASE WHEN $1 = 'Annulée' THEN COALESCE($4, raison_annulation) ELSE null END
+       SET statut = $1::varchar,
+           annule_par = CASE WHEN $1::text = 'Annulée' THEN COALESCE($3::varchar, annule_par) ELSE null END,
+           raison_annulation = CASE WHEN $1::text = 'Annulée' THEN COALESCE($4::text, raison_annulation) ELSE null END
        WHERE id = $2
        RETURNING *`,
       [nextStatus, req.params.id, annulePar, cancellationReason || null]
