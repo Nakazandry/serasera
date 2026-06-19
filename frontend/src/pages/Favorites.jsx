@@ -32,9 +32,9 @@ export default function Favorites() {
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
         <div>
           <span className="badge">Favoris</span>
-          <h1 className="mt-3 text-4xl font-black">Produits favoris</h1>
+          <h1 className="mt-3 text-3xl font-black sm:text-4xl">Produits favoris</h1>
         </div>
-        <Link className="btn btn-ghost" to="/products"><FiHeart /> Voir le catalogue</Link>
+        <Link className="btn btn-ghost w-full md:w-auto" to="/products"><FiHeart /> Voir le catalogue</Link>
       </div>
 
       {favorites.length === 0 ? (

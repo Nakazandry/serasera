@@ -76,11 +76,11 @@ export default function Products() {
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
         <div>
           <span className="badge">Catalogue</span>
-          <h1 className="mt-3 text-4xl font-black">Produits disponibles</h1>
+          <h1 className="mt-3 text-3xl font-black sm:text-4xl">Produits disponibles</h1>
         </div>
-        <button className="btn btn-primary" onClick={applyFilters}>Appliquer les filtres</button>
+        <button className="btn btn-primary w-full md:w-auto" onClick={applyFilters}>Appliquer les filtres</button>
       </div>
-      <section className="grid gap-3 rounded-3xl border border-line bg-white/5 p-4 md:grid-cols-6">
+      <section className="grid gap-3 rounded-2xl border border-line bg-white/5 p-3 sm:p-4 md:grid-cols-6">
         <input className="input md:col-span-2" placeholder="Recherche" value={filters.search} onChange={(e) => update('search', e.target.value)} />
         <select className="input" value={filters.category} onChange={(e) => update('category', e.target.value)}>
           <option value="">Catégorie</option>

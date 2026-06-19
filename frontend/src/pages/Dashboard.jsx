@@ -139,18 +139,18 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-8">
-      <section className="flex flex-col justify-between gap-4 rounded-3xl border border-line bg-white/10 p-6 md:flex-row md:items-end">
-        <div>
+      <section className="flex flex-col justify-between gap-4 rounded-2xl border border-line bg-white/10 p-4 sm:rounded-3xl sm:p-6 md:flex-row md:items-end">
+        <div className="min-w-0">
           <span className="badge">Tableau de bord</span>
-          <h1 className="mt-3 text-4xl font-black">Bonjour {user?.prenom || 'vendeur'}</h1>
+          <h1 className="mt-3 break-words text-3xl font-black sm:text-4xl">Bonjour {user?.prenom || 'vendeur'}</h1>
           <p className="mt-2 max-w-2xl text-sm text-slate-300">
             Gérez vos produits, suivez vos commandes et retrouvez rapidement vos favoris.
           </p>
         </div>
-        <div className="flex flex-wrap gap-3">
-          <button className="btn btn-primary" onClick={openAddProduct}><FiPlus /> Ajouter un produit</button>
-          <Link className="btn btn-primary" to="/orders">Commandes <FiArrowRight /></Link>
-          <Link className="btn btn-ghost" to="/favorites">Favoris</Link>
+        <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
+          <button className="btn btn-primary w-full sm:w-auto" onClick={openAddProduct}><FiPlus /> Ajouter un produit</button>
+          <Link className="btn btn-primary w-full sm:w-auto" to="/orders">Commandes <FiArrowRight /></Link>
+          <Link className="btn btn-ghost w-full sm:w-auto" to="/favorites">Favoris</Link>
         </div>
       </section>
 
@@ -168,9 +168,9 @@ export default function Dashboard() {
       <section className="grid gap-6 lg:grid-cols-[1.05fr_.95fr]">
         <div className="space-y-5">
           <section className="space-y-3">
-            <div className="flex items-center justify-between gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <h2 className="text-2xl font-black">Mes articles</h2>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <button className="text-sm font-semibold text-cyan-200" onClick={openAddProduct}>Ajouter</button>
                 <Link className="text-sm font-semibold text-cyan-200" to="/products">Voir catalogue</Link>
               </div>
@@ -183,12 +183,12 @@ export default function Dashboard() {
             {products.map((product) => (
               <div className="grid gap-3 rounded-2xl border border-line bg-white/5 p-4 sm:grid-cols-[64px_1fr_auto]" key={product.id}>
                 <ProductImage className="h-16 w-16 rounded-2xl object-cover" src={product.image_url} alt={product.titre} />
-                <div>
-                  <p className="font-bold">{product.titre}</p>
+                <div className="min-w-0">
+                  <p className="break-words font-bold">{product.titre}</p>
                   <p className="text-sm text-slate-400">{Number(product.prix).toLocaleString('fr-FR')} Ar · {product.statut}</p>
                   {product.localisation && <p className="mt-1 flex items-center gap-1 text-xs text-slate-400"><FiMapPin /> {product.localisation}</p>}
                 </div>
-                <div className="flex items-center gap-2 self-center">
+                <div className="flex items-center gap-2 self-center sm:justify-end">
                   <button className="rounded-full border border-cyan-200/30 p-3 text-cyan-100 transition hover:bg-cyan-300/15" onClick={() => openEditProduct(product)} title="Modifier le produit">
                     <FiEdit2 />
                   </button>
@@ -240,7 +240,7 @@ export default function Dashboard() {
         <div className="fixed inset-0 z-[70] grid place-items-center bg-slate-950/70 px-4 py-6 backdrop-blur-sm">
           <form className="card max-h-[90vh] w-full max-w-2xl space-y-4 overflow-y-auto" onSubmit={submit}>
             <div className="flex items-center justify-between gap-3">
-              <h2 className="flex items-center gap-2 text-2xl font-black">
+              <h2 className="flex min-w-0 items-center gap-2 text-xl font-black sm:text-2xl">
                 {editingProduct ? <FiEdit2 /> : <FiPlus />} {editingProduct ? 'Modifier le produit' : 'Ajouter un produit'}
               </h2>
               <button className="rounded-full border border-line p-3 text-slate-200 transition hover:bg-white/10" type="button" onClick={closeProductModal} title="Fermer">

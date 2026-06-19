@@ -157,13 +157,13 @@ export default function Orders() {
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
         <div>
           <span className="badge">Commandes</span>
-          <h1 className="mt-3 text-4xl font-black">Achats et ventes</h1>
+          <h1 className="mt-3 text-3xl font-black sm:text-4xl">Achats et ventes</h1>
         </div>
-        <div className="inline-flex rounded-full border border-line bg-white/5 p-1">
-          <button className={`btn ${tab === 'achats' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setTab('achats')}>
+        <div className="grid gap-1 rounded-2xl border border-line bg-white/5 p-1 sm:inline-flex sm:rounded-full">
+          <button className={`btn w-full ${tab === 'achats' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setTab('achats')}>
             <FiShoppingBag /> Mes achats ({purchases.length})
           </button>
-          <button className={`btn ${tab === 'ventes' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setTab('ventes')}>
+          <button className={`btn w-full ${tab === 'ventes' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setTab('ventes')}>
             <FiTruck /> Mes ventes ({sales.length})
           </button>
         </div>
@@ -176,10 +176,10 @@ export default function Orders() {
           </div>
         )}
         {visibleOrders.map((order) => (
-          <div className="grid gap-4 rounded-3xl border border-line bg-white/5 p-4 md:grid-cols-[80px_1fr_260px]" key={order.id}>
+          <div className="grid gap-4 rounded-2xl border border-line bg-white/5 p-4 md:grid-cols-[80px_1fr_260px] sm:rounded-3xl" key={order.id}>
             <ProductImage className="h-20 w-20 rounded-2xl object-cover" src={order.image_url} alt={order.titre} />
-            <div>
-              <p className="font-bold">{order.titre}</p>
+            <div className="min-w-0">
+              <p className="break-words font-bold">{order.titre}</p>
               <p className="text-sm text-slate-400">Commande #{order.id} · Qté {order.quantite}</p>
               <p className="mt-2 text-sm text-slate-300">
                 {tab === 'achats'
@@ -198,9 +198,9 @@ export default function Orders() {
                 </div>
               )}
             </div>
-            <div className="space-y-3 text-right">
+            <div className="space-y-3 text-left md:text-right">
               <span className="badge">{order.statut}</span>
-              <p className="mt-2 font-black">{Number(order.total).toLocaleString('fr-FR')} Ar</p>
+              <p className="mt-2 break-words font-black">{Number(order.total).toLocaleString('fr-FR')} Ar</p>
               {tab === 'achats' && order.statut === 'Livrée' && (
                 <button className="btn btn-ghost mt-3" onClick={() => setRating((current) => ({ ...current, commande_id: order.id }))}>
                   <FiStar /> Noter

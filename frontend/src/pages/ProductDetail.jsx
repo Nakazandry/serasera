@@ -121,31 +121,31 @@ export default function ProductDetail() {
   }
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-8 sm:space-y-10">
       <section className="grid gap-8 lg:grid-cols-2">
         <div className="space-y-3">
           <div
-            className="relative overflow-hidden rounded-3xl border border-line shadow-glow"
+            className="relative isolate overflow-hidden rounded-2xl border border-line bg-slate-950 sm:rounded-3xl sm:shadow-glow"
             onTouchStart={(event) => { touchStartXRef.current = event.touches[0].clientX; }}
             onTouchEnd={handleTouchEnd}
           >
-            <ProductImage className="aspect-[4/3] w-full object-cover" src={selectedImage || product.image_url} alt={product.titre} iconClassName="text-5xl" />
+            <ProductImage className="aspect-[4/3] w-full object-contain sm:object-cover" src={selectedImage || product.image_url} alt={product.titre} iconClassName="text-5xl" />
             {productImages.length > 1 && (
               <>
-                <button className="absolute left-3 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-line bg-slate-950/70 text-white backdrop-blur transition hover:bg-cyan-300 hover:text-slate-950" onClick={showPreviousImage} type="button" title="Image précédente">
+                <button className="absolute left-2 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-line bg-slate-950/80 text-white transition hover:bg-cyan-300 hover:text-slate-950 sm:left-3 sm:h-11 sm:w-11" onClick={showPreviousImage} type="button" title="Image précédente">
                   <FiChevronLeft />
                 </button>
-                <button className="absolute right-3 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-line bg-slate-950/70 text-white backdrop-blur transition hover:bg-cyan-300 hover:text-slate-950" onClick={showNextImage} type="button" title="Image suivante">
+                <button className="absolute right-2 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-line bg-slate-950/80 text-white transition hover:bg-cyan-300 hover:text-slate-950 sm:right-3 sm:h-11 sm:w-11" onClick={showNextImage} type="button" title="Image suivante">
                   <FiChevronRight />
                 </button>
-                <span className="absolute bottom-3 right-3 rounded-full border border-line bg-slate-950/75 px-3 py-1 text-xs font-bold text-white backdrop-blur">
+                <span className="absolute bottom-3 right-3 rounded-full border border-line bg-slate-950/80 px-3 py-1 text-xs font-bold text-white">
                   {selectedImageIndex + 1}/{productImages.length}
                 </span>
               </>
             )}
           </div>
           {productImages.length > 1 && (
-            <div className="grid grid-cols-4 gap-3 sm:grid-cols-6">
+            <div className="grid grid-cols-4 gap-2 sm:grid-cols-6 sm:gap-3">
               {productImages.map((image, index) => (
                 <button className={`overflow-hidden rounded-2xl border ${image === selectedImage ? 'border-cyan-300' : 'border-line'}`} onClick={() => setSelectedImage(image)} key={`${image.slice(0, 48)}-${index}`}>
                   <ProductImage className="aspect-square w-full object-cover" src={image} alt={`${product.titre} ${index + 1}`} />
@@ -157,7 +157,7 @@ export default function ProductDetail() {
         <div className="space-y-6">
           <div className="space-y-3">
             <span className="badge">{product.categorie_nom || 'Marketplace'}</span>
-            <h1 className="text-4xl font-black">{product.titre}</h1>
+            <h1 className="break-words text-3xl font-black sm:text-4xl">{product.titre}</h1>
             <p className="text-slate-300">{product.description}</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -165,10 +165,10 @@ export default function ProductDetail() {
             <span className="badge">Stock {product.stock || 1}</span>
             <span className="badge flex items-center gap-1 text-amber-200"><FiStar /> {product.note_vendeur || 0}</span>
           </div>
-          <p className="text-4xl font-black text-cyan-200">{Number(product.prix).toLocaleString('fr-FR')} Ar</p>
+          <p className="break-words text-3xl font-black text-cyan-200 sm:text-4xl">{Number(product.prix).toLocaleString('fr-FR')} Ar</p>
           <div className="flex flex-wrap gap-3">
             <button
-              className={`btn relative ${Number(product.vendeur_id) === Number(user?.id) || Number(product.stock || 0) <= 0 ? 'cursor-not-allowed border border-line bg-white/10 text-slate-400' : 'btn-primary'}`}
+              className={`btn relative w-full sm:w-auto ${Number(product.vendeur_id) === Number(user?.id) || Number(product.stock || 0) <= 0 ? 'cursor-not-allowed border border-line bg-white/10 text-slate-400' : 'btn-primary'}`}
               disabled={Number(product.vendeur_id) === Number(user?.id) || Number(product.stock || 0) <= 0}
               onClick={() => addCart(product)}
             >
@@ -179,11 +179,11 @@ export default function ProductDetail() {
                 </span>
               )}
             </button>
-            <button className={`btn ${favorite ? 'btn-primary' : 'btn-ghost'}`} onClick={() => toggleFavorite(product).catch(() => null)}>
+            <button className={`btn w-full sm:w-auto ${favorite ? 'btn-primary' : 'btn-ghost'}`} onClick={() => toggleFavorite(product).catch(() => null)}>
               {favorite ? <FaHeart /> : <FiHeart />} {favorite ? 'Favori' : 'Ajouter favori'}
             </button>
             <Link
-              className="btn btn-ghost"
+              className="btn btn-ghost w-full sm:w-auto"
               to="/messages"
               state={{
                 recipientId: product.vendeur_id,
@@ -194,7 +194,7 @@ export default function ProductDetail() {
             >
               <FiMessageCircle /> Contacter vendeur
             </Link>
-            <button className="btn btn-ghost text-rose-100" onClick={reportSeller}>
+            <button className="btn btn-ghost w-full text-rose-100 sm:w-auto" onClick={reportSeller}>
               <FiFlag /> Signaler ce compte
             </button>
           </div>

@@ -16,14 +16,14 @@ export default function Landing() {
 
   return (
     <div className="space-y-14">
-      <section className="grid min-h-[70vh] items-center gap-10 py-8 lg:grid-cols-[1.05fr_.95fr]">
+      <section className="grid min-h-[70vh] items-center gap-8 py-6 sm:gap-10 sm:py-8 lg:grid-cols-[1.05fr_.95fr]">
         <div className="space-y-7">
           <div className="flex items-center gap-4">
             <Logo markClassName="h-16 w-16" />
             <span className="badge">Marketplace futuriste et locale</span>
           </div>
           <div className="space-y-5">
-            <h1 className="max-w-3xl text-5xl font-black leading-tight md:text-7xl">Sera-Sera</h1>
+            <h1 className="max-w-3xl text-4xl font-black leading-tight sm:text-5xl md:text-7xl">Sera-Sera</h1>
             <p className="max-w-2xl text-lg text-slate-300">
               Achetez, vendez, discutez et notez les meilleurs vendeurs dans une expérience e-commerce rapide, élégante et sécurisée.
             </p>
@@ -46,10 +46,10 @@ export default function Landing() {
           </div>
         </div>
         <div className="relative">
-          <div className="grid h-[520px] place-items-center rounded-[2rem] border border-line bg-white/10 p-8 shadow-glow">
+          <div className="grid min-h-[320px] place-items-center rounded-2xl border border-line bg-white/10 p-6 shadow-glow sm:h-[520px] sm:rounded-[2rem] sm:p-8">
             <div className="space-y-6 text-center">
-              <Logo className="justify-center" markClassName="h-44 w-44" />
-              <p className="text-4xl font-black">Sera-Sera</p>
+              <Logo className="justify-center" markClassName="h-28 w-28 sm:h-44 sm:w-44" />
+              <p className="text-3xl font-black sm:text-4xl">Sera-Sera</p>
               <p className="mx-auto max-w-sm text-sm text-slate-300">Une identité simple pour vos produits, vos commandes et vos discussions.</p>
             </div>
           </div>
@@ -72,8 +72,8 @@ export default function Landing() {
 
       <section className="space-y-6">
         <div className="flex items-center justify-between gap-4">
-          <h2 className="text-3xl font-black">Produits populaires</h2>
-          <Link className="btn btn-ghost" to="/products">Voir tout</Link>
+          <h2 className="text-2xl font-black sm:text-3xl">Produits populaires</h2>
+          <Link className="btn btn-ghost shrink-0" to="/products">Voir tout</Link>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {popularProducts.length === 0 && (

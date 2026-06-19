@@ -4,9 +4,25 @@
 
 @layer base {
   * { box-sizing: border-box; }
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
   ::selection {
     background: #67e8f9;
     color: #020617;
+  }
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+  img {
+    display: block;
   }
   body {
     margin: 0;
@@ -47,11 +63,11 @@
 }
 
 @layer components {
-  .glass { @apply border border-line bg-white/10 shadow-glow backdrop-blur-xl; }
-  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition hover:-translate-y-0.5; }
+  .glass { @apply min-w-0 border border-line bg-white/10 shadow-glow backdrop-blur-xl; }
+  .btn { @apply inline-flex min-w-0 items-center justify-center gap-2 rounded-full px-4 py-2 text-center text-sm font-semibold transition hover:-translate-y-0.5; }
   .btn-primary { @apply bg-cyan-300 text-slate-950 hover:bg-white; }
   .btn-ghost { @apply border border-line bg-white/5 text-slate-100 hover:bg-white/10; }
-  .input { @apply w-full rounded-2xl border border-line bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-400 focus:border-cyan-300; }
+  .input { @apply w-full min-w-0 rounded-2xl border border-line bg-white/10 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-400 focus:border-cyan-300; }
   .card { @apply glass rounded-2xl p-5; }
   .badge { @apply rounded-full border border-line bg-white/10 px-3 py-1 text-xs text-slate-200; }
 }
@@ -105,5 +121,31 @@
   body.theme-light .bg-ink\/80,
   body.theme-light .bg-ink\/90 {
     background-color: rgba(248, 250, 252, .9);
+  }
+  @media (hover: none) and (pointer: coarse) {
+    .hover\:-translate-y-0\.5:hover,
+    .hover\:-translate-y-1:hover,
+    .group:hover .group-hover\:scale-105 {
+      transform: none;
+    }
+  }
+  @media (max-width: 640px) {
+    h1 {
+      font-size: 2rem;
+      line-height: 1.1;
+    }
+    h2 {
+      font-size: 1.5rem;
+      line-height: 1.15;
+    }
+    .card,
+    .glass {
+      border-radius: 1rem;
+      padding: 1rem;
+    }
+    .btn {
+      padding-left: .875rem;
+      padding-right: .875rem;
+    }
   }
 }

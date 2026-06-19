@@ -122,9 +122,9 @@ export default function Messages() {
     : messages.slice(0, 8);
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
+    <div className="grid min-w-0 gap-6 lg:grid-cols-[360px_1fr]">
       <aside className="space-y-3">
-        <h1 className="text-4xl font-black">Messages</h1>
+        <h1 className="text-3xl font-black sm:text-4xl">Messages</h1>
         {selected?.recipientId && !contacts.some((contact) => Number(contact.recipientId) === Number(selected.recipientId)) && (
           <button className="w-full rounded-2xl border border-cyan-300/30 bg-cyan-300/10 p-4 text-left" onClick={() => setSelected(selected)}>
             <p className="font-bold">{selected.recipientName}</p>
@@ -151,17 +151,17 @@ export default function Messages() {
           </div>
         ))}
       </aside>
-      <section className="rounded-3xl border border-line bg-white/10 p-5">
+      <section className="min-w-0 rounded-2xl border border-line bg-white/10 p-4 sm:rounded-3xl sm:p-5">
         <div className="mb-5 rounded-2xl border border-line bg-white/5 p-4">
           <p className="text-sm text-slate-400">Conversation</p>
           <p className="font-bold">{selected?.recipientName || 'Choisissez une personne'}</p>
           {selected?.productTitle && <p className="mt-1 text-sm text-cyan-200">{selected.productTitle}</p>}
         </div>
-        <div className="mb-5 min-h-[420px] space-y-3">
+        <div className="mb-5 min-h-[320px] space-y-3 sm:min-h-[420px]">
           {selectedMessages.map((message) => {
             const isMine = Number(message.expediteur_id) === Number(user?.id);
             return (
-            <div className={`max-w-xl rounded-3xl p-4 ${isMine ? 'ml-auto bg-cyan-300/15' : 'bg-white/10'}`} key={message.id}>
+            <div className={`max-w-xl break-words rounded-2xl p-4 sm:rounded-3xl ${isMine ? 'ml-auto bg-cyan-300/15' : 'bg-white/10'}`} key={message.id}>
               <p className="text-sm text-slate-400">
                 {Number(message.expediteur_id) === Number(user?.id) ? 'Vous' : `${message.expediteur_prenom || ''} ${message.expediteur_nom || ''}`.trim()} · {new Date(message.date_envoi).toLocaleString('fr-FR')}
                 {message.modifie_le && ' · modifié'}
@@ -183,7 +183,7 @@ export default function Messages() {
         </div>
         <form className="grid gap-3 md:grid-cols-[1fr_auto]" onSubmit={submit}>
           <input className="input" placeholder={selected?.recipientName ? `Message à ${selected.recipientName}` : 'Choisissez une personne'} value={content} onChange={(e) => setContent(e.target.value)} required />
-          <button className="btn btn-primary"><FiSend /></button>
+          <button className="btn btn-primary w-full md:w-auto"><FiSend /></button>
         </form>
       </section>
     </div>

@@ -25,7 +25,7 @@ export default function Auth({ mode }) {
   };
 
   return (
-    <section className="mx-auto grid max-w-5xl overflow-hidden rounded-[2rem] border border-line bg-white/10 shadow-glow lg:grid-cols-2">
+    <section className="mx-auto grid max-w-5xl overflow-hidden rounded-2xl border border-line bg-white/10 shadow-glow sm:rounded-[2rem] lg:grid-cols-2">
       <div className="hidden min-h-[620px] place-items-center bg-slate-950/60 p-10 lg:grid">
         <div className="space-y-8 text-center">
           <Logo className="justify-center" markClassName="h-36 w-36" />
@@ -40,10 +40,10 @@ export default function Auth({ mode }) {
           </div>
         </div>
       </div>
-      <form className="space-y-5 p-6 md:p-10" onSubmit={submit}>
+      <form className="space-y-5 p-4 sm:p-6 md:p-10" onSubmit={submit}>
         <div>
           <span className="badge">{isRegister ? 'Créer un compte' : 'Bienvenue'}</span>
-          <h1 className="mt-4 text-4xl font-black">{isRegister ? 'Rejoindre Sera-Sera' : 'Connexion'}</h1>
+          <h1 className="mt-4 text-3xl font-black sm:text-4xl">{isRegister ? 'Rejoindre Sera-Sera' : 'Connexion'}</h1>
         </div>
         {isRegister && (
           <div className="grid gap-3 sm:grid-cols-2">

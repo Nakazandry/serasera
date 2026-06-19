@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const path = require('path');
 
 const authRoutes = require('./routes/auth.routes');
 const productRoutes = require('./routes/product.routes');
@@ -66,6 +67,13 @@ app.use('/api/messages', messageRoutes);
 app.use('/api/ratings', ratingRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/admin', adminRoutes);
+
+const clientDistPath = path.resolve(__dirname, '../../frontend/dist');
+app.use(express.static(clientDistPath));
+app.get(/^\/(?!api\/?).*/, (_req, res) => {
+  res.sendFile(path.join(clientDistPath, 'index.html'));
+});
+
 app.use(errorHandler);
 
 module.exports = app;

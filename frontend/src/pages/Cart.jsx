@@ -35,7 +35,7 @@ export default function Cart() {
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
       <section className="space-y-4">
-        <h1 className="text-4xl font-black">Panier</h1>
+        <h1 className="text-3xl font-black sm:text-4xl">Panier</h1>
         {items.length === 0 && <p className="rounded-3xl border border-line bg-white/5 p-8 text-center text-slate-300">Votre panier est vide.</p>}
         {items.map((item) => (
           <div className="grid gap-4 rounded-3xl border border-line bg-white/5 p-4 md:grid-cols-[96px_1fr_auto]" key={item.id}>
@@ -50,9 +50,9 @@ export default function Cart() {
                 {item.vendeur_adresse && <p className="flex items-center gap-2"><FiMapPin className="text-cyan-200" /> {item.vendeur_adresse}</p>}
               </div>
             </div>
-            <div className="flex items-center gap-2 md:flex-col md:items-end">
+            <div className="flex flex-col gap-2 sm:flex-row md:flex-col md:items-end">
               <Link
-                className="btn btn-ghost"
+                className="btn btn-ghost w-full"
                 to="/messages"
                 state={{
                   recipientId: item.vendeur_id,
@@ -63,12 +63,12 @@ export default function Cart() {
               >
                 <FiMessageCircle /> Contacter
               </Link>
-              <button className="rounded-full border border-rose-300/30 p-3 text-rose-200 transition hover:bg-rose-400/15" onClick={() => removeFromCart(item.id)} title="Retirer du panier"><FiTrash2 /></button>
+              <button className="grid h-11 w-full place-items-center rounded-full border border-rose-300/30 p-3 text-rose-200 transition hover:bg-rose-400/15 sm:w-11" onClick={() => removeFromCart(item.id)} title="Retirer du panier"><FiTrash2 /></button>
             </div>
           </div>
         ))}
       </section>
-      <aside className="h-fit rounded-3xl border border-line bg-white/10 p-5">
+      <aside className="h-fit rounded-2xl border border-line bg-white/10 p-4 sm:rounded-3xl sm:p-5">
         <div className="mb-5 space-y-3">
           <p className="flex items-center gap-2 text-sm font-bold"><FiTruck className="text-cyan-200" /> Livraison avant confirmation</p>
           <label>
@@ -92,7 +92,7 @@ export default function Cart() {
           </label>
         </div>
         <p className="text-sm text-slate-400">Total</p>
-        <p className="mt-2 text-4xl font-black text-cyan-200">{total.toLocaleString('fr-FR')} Ar</p>
+        <p className="mt-2 break-words text-3xl font-black text-cyan-200 sm:text-4xl">{total.toLocaleString('fr-FR')} Ar</p>
         <button className="btn btn-primary mt-5 w-full" onClick={submitCheckout} disabled={items.length === 0}>Valider commande</button>
       </aside>
     </div>

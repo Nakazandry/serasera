@@ -87,19 +87,19 @@ export default function Profile() {
               {(user?.prenom?.[0] || user?.email?.[0] || 'U').toUpperCase()}
             </div>
           )}
-          <h1 className="mt-5 text-3xl font-black">{fullName}</h1>
+          <h1 className="mt-5 break-words text-2xl font-black sm:text-3xl">{fullName}</h1>
           <p className="mt-1 text-sm text-slate-400">{user?.role === 'admin' ? 'Administrateur' : 'Membre Sera-Sera'}</p>
           <div className="mt-6 space-y-3 text-sm text-slate-300">
-            <p className="flex items-center gap-2"><FiMail className="text-cyan-200" /> {user?.email || 'Email non renseigné'}</p>
-            <p className="flex items-center gap-2"><FiPhone className="text-cyan-200" /> {user?.telephone || 'Téléphone non renseigné'}</p>
-            <p className="flex items-center gap-2"><FiMapPin className="text-cyan-200" /> {user?.adresse || 'Adresse non renseignée'}</p>
+            <p className="flex min-w-0 items-center gap-2 break-words"><FiMail className="shrink-0 text-cyan-200" /> {user?.email || 'Email non renseigné'}</p>
+            <p className="flex min-w-0 items-center gap-2 break-words"><FiPhone className="shrink-0 text-cyan-200" /> {user?.telephone || 'Téléphone non renseigné'}</p>
+            <p className="flex min-w-0 items-center gap-2 break-words"><FiMapPin className="shrink-0 text-cyan-200" /> {user?.adresse || 'Adresse non renseignée'}</p>
           </div>
         </aside>
 
         <div className="space-y-5">
           <div>
             <span className="badge">Profil</span>
-            <h2 className="mt-3 text-4xl font-black">Votre compte</h2>
+            <h2 className="mt-3 text-3xl font-black sm:text-4xl">Votre compte</h2>
           </div>
           <section className="grid gap-4 md:grid-cols-4">
             {[
@@ -115,9 +115,9 @@ export default function Profile() {
               </div>
             ))}
           </section>
-          <div className="flex flex-wrap gap-3">
-            <Link className="btn btn-primary" to="/orders">Voir mes commandes</Link>
-            <Link className="btn btn-ghost" to="/favorites">Voir mes favoris</Link>
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Link className="btn btn-primary w-full sm:w-auto" to="/orders">Voir mes commandes</Link>
+            <Link className="btn btn-ghost w-full sm:w-auto" to="/favorites">Voir mes favoris</Link>
           </div>
           <section className="card grid gap-4 md:grid-cols-2">
             <div>
@@ -130,7 +130,7 @@ export default function Profile() {
             </div>
             <div>
               <p className="text-sm text-slate-400">Email</p>
-              <p className="mt-1 font-bold">{user?.email || '-'}</p>
+              <p className="mt-1 break-words font-bold">{user?.email || '-'}</p>
             </div>
             <div>
               <p className="text-sm text-slate-400">Compte créé</p>
@@ -147,7 +147,7 @@ export default function Profile() {
             <h2 className="mt-3 text-2xl font-black">Photo de profil</h2>
             <p className="mt-1 text-sm text-slate-400">JPG, PNG ou WebP, maximum 5 Mo.</p>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
             {avatarPreview ? (
               <img className="h-24 w-24 rounded-full object-cover" src={avatarPreview} alt={fullName} />
             ) : (
@@ -155,7 +155,7 @@ export default function Profile() {
                 {(user?.prenom?.[0] || user?.email?.[0] || 'U').toUpperCase()}
               </div>
             )}
-            <label className="btn btn-ghost cursor-pointer">
+            <label className="btn btn-ghost w-full cursor-pointer sm:w-auto">
               <FiCamera /> Changer
               <input className="sr-only" type="file" accept="image/*" onChange={(e) => setAvatarFile(e.target.files?.[0] || null)} />
             </label>

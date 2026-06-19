@@ -70,7 +70,7 @@ export default function Admin() {
     <div className="space-y-8">
       <div>
         <span className="badge">Administration</span>
-        <h1 className="mt-3 text-4xl font-black">Pilotage marketplace</h1>
+        <h1 className="mt-3 text-3xl font-black sm:text-4xl">Pilotage marketplace</h1>
       </div>
       <section className="grid gap-4 md:grid-cols-4">
         {[
@@ -100,7 +100,7 @@ export default function Admin() {
 
 function CategoriesPanel({ rows, form, onChange, onSubmit }) {
   return (
-    <section className="rounded-3xl border border-line bg-white/5">
+    <section className="rounded-2xl border border-line bg-white/5 sm:rounded-3xl">
       <div className="border-b border-line p-4">
         <h2 className="flex items-center gap-2 text-xl font-black"><FiTag /> Catégories</h2>
         <p className="mt-1 text-sm text-slate-400">Les vendeurs choisissent une catégorie existante. L’admin ajoute les catégories manquantes.</p>
@@ -134,7 +134,7 @@ function CategoriesPanel({ rows, form, onChange, onSubmit }) {
 
 function UsersTable({ rows, onBan, onUnban }) {
   return (
-    <div className="overflow-hidden rounded-3xl border border-line bg-white/5">
+    <div className="overflow-hidden rounded-2xl border border-line bg-white/5 sm:rounded-3xl">
       <h2 className="border-b border-line p-4 text-xl font-black">Utilisateurs</h2>
       <div className="space-y-3 p-4">
         {rows.slice(0, 8).map((user) => (
@@ -156,7 +156,7 @@ function UsersTable({ rows, onBan, onUnban }) {
 
 function ReportsTable({ rows, onBan, onStatus }) {
   return (
-    <section className="rounded-3xl border border-line bg-white/5">
+    <section className="rounded-2xl border border-line bg-white/5 sm:rounded-3xl">
       <div className="border-b border-line p-4">
         <h2 className="text-xl font-black">Signalements</h2>
         <p className="mt-1 text-sm text-slate-400">Raisons contrôlées et actions rapides sur le compte signalé.</p>
@@ -165,8 +165,8 @@ function ReportsTable({ rows, onBan, onStatus }) {
         {rows.length === 0 && <p className="text-sm text-slate-400">Aucun signalement.</p>}
         {rows.map((report) => (
           <div className="grid gap-3 rounded-2xl border border-line bg-white/5 p-4 lg:grid-cols-[1fr_auto]" key={report.id}>
-            <div>
-              <p className="font-bold">{report.motif}</p>
+            <div className="min-w-0">
+              <p className="break-words font-bold">{report.motif}</p>
               <p className="text-sm text-slate-300">
                 Signalé: {report.cible_prenom || ''} {report.cible_nom || ''} · {report.cible_email || 'Compte supprimé'}
               </p>
@@ -196,7 +196,7 @@ function ReportsTable({ rows, onBan, onStatus }) {
 
 function Table({ title, rows, keys }) {
   return (
-    <div className="overflow-hidden rounded-3xl border border-line bg-white/5">
+    <div className="overflow-hidden rounded-2xl border border-line bg-white/5 sm:rounded-3xl">
       <h2 className="border-b border-line p-4 text-xl font-black">{title}</h2>
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm">

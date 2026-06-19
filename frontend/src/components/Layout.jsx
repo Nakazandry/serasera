@@ -258,7 +258,7 @@ export default function Layout() {
           )}
         </div>
       </header>
-      <main className="mx-auto max-w-7xl px-4 py-8">
+      <main className="mx-auto max-w-7xl px-3 py-5 sm:px-4 sm:py-8">
         <Outlet />
       </main>
       <nav className={`fixed bottom-3 left-3 right-3 z-40 grid ${mobileNav.length === 7 ? 'grid-cols-7' : 'grid-cols-6'} gap-1 rounded-3xl border border-line bg-ink/90 p-2 backdrop-blur-xl sm:bottom-4 sm:left-4 sm:right-4 sm:gap-2 lg:hidden`}>
