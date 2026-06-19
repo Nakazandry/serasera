@@ -204,12 +204,16 @@ export default function Layout() {
     return undefined;
   };
 
+  const mobileNav = isAuthenticated
+    ? [...nav, { to: '/profile', label: 'Profil', icon: FiUser }]
+    : nav;
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-24 lg:pb-0">
       <header className="sticky top-0 z-30 border-b border-line bg-ink/80 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-4">
-          <Link to="/" className="mr-auto flex items-center gap-3 font-black tracking-wide">
-            <Logo showText markClassName="h-10 w-10" />
+        <div className="mx-auto flex max-w-7xl items-center gap-2 px-3 py-3 sm:gap-4 sm:px-4 sm:py-4">
+          <Link to="/" className="mr-auto flex min-w-0 items-center gap-3 font-black tracking-wide">
+            <Logo showText markClassName="h-9 w-9 sm:h-10 sm:w-10" />
           </Link>
           <form className="hidden flex-1 items-center rounded-full border border-line bg-white/10 px-4 py-2 md:flex" onSubmit={submitSearch}>
             <FiSearch className="text-cyan-200" />
@@ -248,21 +252,28 @@ export default function Layout() {
             </Link>
           )}
           {isAuthenticated ? (
-            <button className="btn btn-ghost" onClick={signOut} title="Déconnexion"><FiLogOut /></button>
+            <button className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-line bg-white/5 text-slate-100 transition hover:bg-white/10 sm:h-auto sm:w-auto sm:px-4 sm:py-2" onClick={signOut} title="Déconnexion" aria-label="Déconnexion"><FiLogOut /></button>
           ) : (
-            <Link className="btn btn-primary" to="/login">Connexion</Link>
+            <Link className="btn btn-primary shrink-0 px-3 sm:px-4" to="/login">Connexion</Link>
           )}
         </div>
       </header>
       <main className="mx-auto max-w-7xl px-4 py-8">
         <Outlet />
       </main>
-      <nav className="fixed bottom-4 left-4 right-4 z-40 grid grid-cols-6 gap-2 rounded-3xl border border-line bg-ink/90 p-2 backdrop-blur-xl lg:hidden">
-        {nav.map((item) => {
+      <nav className={`fixed bottom-3 left-3 right-3 z-40 grid ${mobileNav.length === 7 ? 'grid-cols-7' : 'grid-cols-6'} gap-1 rounded-3xl border border-line bg-ink/90 p-2 backdrop-blur-xl sm:bottom-4 sm:left-4 sm:right-4 sm:gap-2 lg:hidden`}>
+        {mobileNav.map((item) => {
           const Icon = item.icon;
           const badgeValue = getBadgeValue(item);
           return (
-            <NavLink key={item.to} to={item.to} onClick={getNavClick(item)} className="grid place-items-center rounded-2xl py-3 text-lg text-slate-200">
+            <NavLink
+              key={item.to}
+              to={item.to}
+              onClick={getNavClick(item)}
+              className={({ isActive }) => `grid h-12 min-w-0 place-items-center rounded-2xl text-lg transition sm:h-14 ${isActive ? 'bg-cyan-300 text-slate-950' : 'text-slate-200 hover:bg-white/10'}`}
+              title={item.label}
+              aria-label={item.label}
+            >
               <span className="relative">
                 <Icon />
                 {badgeValue > 0 && (

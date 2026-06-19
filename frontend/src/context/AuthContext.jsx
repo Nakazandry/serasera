@@ -1,14 +1,28 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import api from '../services/api';
+import api, { clearStoredAuth, isTokenUsable } from '../services/api';
 
 const AuthContext = createContext(null);
 
-export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(() => localStorage.getItem('sera_token'));
-  const [user, setUser] = useState(() => {
+const getStoredUser = () => {
+  try {
     const raw = localStorage.getItem('sera_user');
     return raw ? JSON.parse(raw) : null;
+  } catch {
+    localStorage.removeItem('sera_user');
+    return null;
+  }
+};
+
+export const AuthProvider = ({ children }) => {
+  const [token, setToken] = useState(() => {
+    const storedToken = localStorage.getItem('sera_token');
+    if (!isTokenUsable(storedToken)) {
+      clearStoredAuth(false);
+      return null;
+    }
+    return storedToken;
   });
+  const [user, setUser] = useState(() => (isTokenUsable(localStorage.getItem('sera_token')) ? getStoredUser() : null));
 
   const persist = (payload) => {
     localStorage.setItem('sera_token', payload.token);
@@ -30,8 +44,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('sera_token');
-    localStorage.removeItem('sera_user');
+    clearStoredAuth(false);
     setToken(null);
     setUser(null);
   };
